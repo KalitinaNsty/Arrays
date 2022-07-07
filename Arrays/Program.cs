@@ -44,5 +44,14 @@ namespace Arrays
                 }
             }
         }
+        static int GetSumm(int[] array)
+        {
+            int summ = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                summ += array[i];
+            }
+            return summ;
+        }
     }
 }
