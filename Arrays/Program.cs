@@ -7,7 +7,7 @@ namespace Arrays
         //доп задания
         static void Main(string[] args)
         {
-            int[] array = GetRandom(5, -1, 8);
+            /*int[] array = GetRandom(5, -1, 8);
             Write(array);
             GetBubble(array);
             Write(array);
@@ -30,7 +30,7 @@ namespace Arrays
             int summMatrix = GetSummMatrix(matrix, n, m);
             Console.WriteLine(summMatrix);
             Console.WriteLine("введите число, мы проверим, есть ли оно в матрице: ");
-            int number = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());*/
         }
         static int[] GetRandom(int size, int min, int max)
         {
