@@ -11,6 +11,26 @@ namespace Arrays
             Write(array);
             GetBubble(array);
             Write(array);
+            Console.WriteLine("Введите минимальное и максимальные число для матрицы: ");
+            int minValue = int.Parse(Console.ReadLine());
+            int maxValue = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введите количество строк и столцов в матрице: ");
+            int n = int.Parse(Console.ReadLine());
+            int m = int.Parse(Console.ReadLine());
+            int[,] matrix = GetRandomMatrix(n, m, minValue, maxValue);
+            WriteMatrix(matrix, n, m);
+            Console.WriteLine("введите норме строки для ее суммы: ");
+            int row = int.Parse(Console.ReadLine());
+            int summRow = GetSummMatrixRow(matrix, n, row);
+            Console.WriteLine(summRow);
+            Console.WriteLine("Введите номер столбца: ");
+            int column = int.Parse(Console.ReadLine());
+            int summColumn = GetSummMatrixColumn(matrix, m, column);
+            Console.WriteLine(summColumn);
+            int summMatrix = GetSummMatrix(matrix, n, m);
+            Console.WriteLine(summMatrix);
+            Console.WriteLine("введите число, мы проверим, есть ли оно в матрице: ");
+            int number = int.Parse(Console.ReadLine());
         }
         static int[] GetRandom(int size, int min, int max)
         {
@@ -254,289 +274,97 @@ namespace Arrays
             }
             return false;
         }
-
-        //20.04.22
-        static void Main(string[] args)
+        
+        static int[,] GetRandomMatrix(int n, int m, int minValue, int maxValue)
         {
-            Console.WriteLine("ведите слово: ");
-            string text = Console.ReadLine();
-            Console.WriteLine("введите символ, мы посчитаем сколько раз он встречается в тексте: ");
-            char symbol = Console.ReadKey().KeyChar;
-            int countSymbol = 0;
-            for (int i = 0; i < text.Length; i++)
+            Random rnd = new Random();
+            int[,] matrix = new int[n, m];
+            for (int i = 0; i < n; i++)
             {
-                if (text[i] == symbol)
+                for (int j = 0; j < m; j++)
                 {
-                    countSymbol++;
+                    matrix[i, j] = rnd.Next(minValue, maxValue);
                 }
+            }
+            return matrix;
+        }
+        static void WriteMatrix(int[,] matrix, int n, int m)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    Console.Write($"{matrix[i, j]} ");
+                }
+                Console.WriteLine();
             }
             Console.WriteLine();
-            Console.WriteLine($"{countSymbol}");
-
-            Console.WriteLine("введите минимальное значение: ");
-            int minNumb = int.Parse(Console.ReadLine());
-            Console.WriteLine("введите максимальное значение: ");
-            int maxNumb = int.Parse(Console.ReadLine());
-            Console.WriteLine("введите количество элементов массива: ");
-            int arrayNumb = int.Parse(Console.ReadLine());
-            Random rnd = new Random();
-            int[] array = new int[arrayNumb];
-            for (int i = 0; i < arrayNumb; i++)
+        }
+        static int GetSummMatrixRow(int[,] matrix,int n, int row)
+        {
+            int summ = 0;
+            for (int i = 0; i <= n; i++)
             {
-                array[i] = rnd.Next(minNumb, maxNumb);
+                summ += matrix[row, i];
             }
-            PrintArray(array);
-
-            Console.WriteLine("введите размерность массива: ");
-            int nNumb = int.Parse(Console.ReadLine());
-            int[] arrayInt = new int[nNumb];
-            int[] counters = new int[nNumb];
-            Random rnd = new Random();
-            for (int i = 0; i < nNumb; i++)
+            return summ;
+        }
+        static int GetSummMatrixColumn(int[,] matrix,int m, int column)
+        {
+            int summ = 0;
+            for (int i = 0; i <= m; i++)
             {
-                arrayInt[i] = rnd.Next(0, 10);
+                summ += matrix[i, column];
             }
-            for (int i = 0; i < nNumb; i++)
+            return summ;
+        }
+        static int GetSummMatrix(int[,] matrix, int n, int m)
+        {
+            int summ = 0;
+            for (int i = 0; i < n; i++)
             {
-                Console.WriteLine($"{arrayInt[i]} ");
-            }
-            Console.Write($"четные числа: ");
-            for (int i = 0; i < nNumb; i++)
-            {
-                if (arrayInt[i] % 2 == 0)
+                for (int j = 0; j < m; j++)
                 {
-                    Console.Write($"{arrayInt[i]} ");
+                    summ += matrix[i, j];
                 }
             }
-            Console.Write($"нечетные числа: ");
-            for (int i = 0; i < nNumb; i++)
+            return summ;
+        }
+        static bool IsDigit(int[,]matrix, int n, int m,  int digit)
+        {
+            for (int i = 0; i < n; i++)
             {
-                if (arrayInt[i] % 2 != 0)
+                for (int j = 0; j < m; j++)
                 {
-                    Console.WriteLine($"{arrayInt[i]} ");
-                }
-            }
-            Console.Write($"числа меньше 10: ");
-            for (int i = 0; i < nNumb; i++)
-            {
-                if (arrayInt[i] < 10)
-                {
-                    Console.WriteLine($"{arrayInt[i]} ");
-                }
-            }
-            Console.Write($"отрицательные: ");
-            for (int i = 0; i < nNumb; i++)
-            {
-                if (arrayInt[i] < 0)
-                {
-                    Console.WriteLine($"{arrayInt[i]} ");
-                }
-            }
-            Console.WriteLine($"встречаются один раз в массиве: ");
-            for (int i = 0; i < nNumb; i++)
-            {
-                for (int j = 0; j < nNumb; j++)
-                {
-                    if (arrayInt[i] == arrayInt[j])
+                    if (matrix[i, j] == digit)
                     {
-                        counters[i]++;
+                        return true;
                     }
                 }
             }
-            for (int i = 0; i < nNumb; i++)
-            {
-                if (counters[i] == 1)
-                {
-                    Console.Write($"{arrayInt[i]} ");
-                }
-            }
-
-            Console.WriteLine("введите число для массива: ");
-            int arrayNumb = int.Parse(Console.ReadLine());
-            int[] arrayVar = new int[arrayNumb];
-            Random rnd = new Random();
-            int maxNumb = 0;
-            int minNumb = 0;
-            int indMax = 0;
-            int indMin = 0;
-            for (int i = 0; i < arrayNumb; i++)
-            {
-                arrayVar[i] = rnd.Next(-100, 100);
-            }
-            for (int i = 0; i < arrayNumb; i++)
-            {
-                Console.Write($"{arrayVar[i]} ");
-            }
-            for (int i = 0; i < arrayNumb; i++)
-            {
-                if (i == 0)
-                {
-                    minNumb = arrayVar[i];
-                    maxNumb = arrayVar[i];
-                }
-                if (arrayVar[i] > maxNumb)
-                {
-                    maxNumb = arrayVar[i];
-                    indMax = i;
-                }
-                if (arrayVar[i] < minNumb)
-                {
-                    minNumb = arrayVar[i];
-                    indMin = i;
-                }
-            }
-
-            arrayVar[indMin] = maxNumb;
-            arrayVar[indMax] = minNumb;
-            Console.WriteLine();
-            for (int i = 0; i < arrayNumb; i++)
-            {
-                Console.Write($"{arrayVar[i]} ");
-            }
-
-            Console.WriteLine("введите слово для проверки: ");
-            string word = Console.ReadLine();
-            bool palindrom = true;
-            for (int i = 0, j = word.Length - 1; i <= j; i++, j--)
-            {
-                if (word[i] != word[j])
-                {
-                    palindrom = false;
-                    break;
-                }
-            }
-            Console.WriteLine(palindrom);
-
-            Console.WriteLine("Задайте размерность массива: ");
-            int arraySomeName = int.Parse(Console.ReadLine());
-            int[] arrayName = new int[arraySomeName];
-            Random rnd = new Random();
-            for (int i = 0; i < arrayName.Length; i++)
-            {
-                arrayName[i] = rnd.Next(-100, 100);
-                Console.Write($"{arrayName[i]} ");
-            }
-            Console.WriteLine();
-            Console.WriteLine("выведем массив в обратном порядке: ");
-            int reverseArray = 0;
-            for (int i = 0, j = arrayName.Length - 1; i < j; i++, j--)
-            {
-                reverseArray = arrayName[i];
-                arrayName[i] = arrayName[j];
-                arrayName[j] = reverseArray;
-            }
-            for (int i = 0; i < arrayName.Length; i++)
-            {
-                Console.Write($"{arrayName[i]} ");
-            }
-
-            Console.WriteLine("Введите размерность массива: ");
-            int param = int.Parse(Console.ReadLine());
-            int[] arrayNambers = new int[param];
-            int minNamber = 0;
-            int maxNamber = 0;
-            int minNamberReverse = 0;
-            int maxNamberReverse = 0;
-            Random rnd = new Random();
-            for (int i = 0; i < param; i++)
-            {
-                arrayNambers[i] = rnd.Next(-100, 100);
-                Console.Write($"{arrayNambers[i]} ");
-            }
-            for (int i = 0; i < param; i++)
-            {
-                if (i == 0)
-                {
-                    minNamber = arrayNambers[i];
-                    maxNamber = arrayNambers[i];
-                }
-                if (minNamber < arrayNambers[i])
-                {
-                    minNamber = arrayNambers[i];
-                    minNamberReverse = i;
-                }
-                if (maxNamber > arrayNambers[i])
-                {
-                    maxNamber = arrayNambers[i];
-                    maxNamberReverse = i;
-                }
-            }
-            arrayNambers[minNamberReverse] = maxNamber;
-            arrayNambers[maxNamberReverse] = minNamber;
-            Console.WriteLine();
-            for (int i = 0; i < param; i++)
-            {
-                Console.Write($"{arrayNambers[i]} ");
-            }
-
-            int size = 10;
-            int[] arrayInt = new int[size];
-            Random rnd = new Random();
-            for (int i = 0; i < arrayInt.Length; i++)
-            {
-                arrayInt[i] = rnd.Next(0, 10);
-
-            }
-            double sum = 0;
-            for (int i = 0; i < arrayInt.Length; i++)
-            {
-                sum += arrayInt[i];
-            }
-            double average = 0;
-            average = sum / arrayInt.Length;
-            int averageMoreCount = 0;
-            for (int i = 0; i < arrayInt.Length; i++)
-            {
-                if (average < arrayInt[i])
-                {
-                    averageMoreCount++;
-                }
-            }
-            int[] arrayMore = new int[averageMoreCount];
-            for (int i = 0, j = 0; j < arrayMore.Length; i++)
-            {
-                if (average < arrayInt[i])
-                {
-                    arrayMore[j] = arrayInt[i];
-                    j++;
-                }
-            }
-            int lessAverage = 0;
-            for (int i = 0; i < arrayInt.Length; i++)
-            {
-                if (average > arrayInt[i])
-                {
-                    lessAverage++;
-                }
-            }
-            int[] arrayLess = new int[lessAverage];
-            for (int i = 0, j = 0; j < arrayLess.Length; i++)
-            {
-                if (average > arrayInt[i])
-                {
-                    arrayLess[j] = arrayInt[i];
-                    j++;
-                }
-            }
-            for (int i = 0; i < arrayInt.Length; i++)
-            {
-                Console.Write($"{arrayInt[i]} ");
-            }
-            Console.WriteLine();
-            for (int i = 0; i < arrayMore.Length; i++)
-            {
-                Console.Write($"{arrayMore[i]} ");
-            }
-            Console.WriteLine();
-            for (int i = 0; i < arrayLess.Length; i++)
-            {
-                Console.Write($"{arrayLess[i]} ");
-            }
-            Console.WriteLine();
-            Console.Write($"{average} ");
-
-
+            return false;
         }
+        static bool IsRowDigit(int[,] matrix, int n, int m, int row)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                if (matrix[row, i] == row)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        static bool IsColumnDigit(int[,] matrix, int n, int m, int column)
+        {
+            for (int i = 0; i < m; i++)
+            {
+                if (matrix[i, column] == column)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
