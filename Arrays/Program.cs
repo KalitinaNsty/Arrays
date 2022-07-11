@@ -32,6 +32,8 @@ namespace Arrays
             Console.WriteLine("введите число, мы проверим, есть ли оно в матрице: ");
             int number = int.Parse(Console.ReadLine());*/
         }
+
+        //25.04
         static int[] GetRandom(int size, int min, int max)
         {
             Random rnd = new Random();
@@ -50,21 +52,7 @@ namespace Arrays
             }
             Console.WriteLine();
         }
-        static void GetBubble(int[] array)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                for (int j = i; j < array.Length; j++)
-                {
-                    if (array[i] > array[j])
-                    {
-                        int numb = array[i];
-                        array[i] = array[j];
-                        array[j] = numb;
-                    }
-                }
-            }
-        }
+
         static int GetSumm(int[] array)
         {
             int summ = 0;
@@ -75,7 +63,153 @@ namespace Arrays
             return summ;
         }
 
-        //25.04.22
+        static bool IsContains(int[] array, int number)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == number)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool IsPalindrom(string word)
+        {
+            for (int i = 0, j = word.Length-1; i < j; i++, j--)
+            {
+                if (word[i] == word[j])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        static bool IsEvenCount(int number)
+        {
+            if (number % 2 == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        static double ToFaringate(double celsius)
+        {
+            return celsius * 1.8 + 32;
+        }
+        static string GetAddress(string city, string street, int house, int flat)
+        {
+            return ($"city:{city}, street:{street}, house: {house}, flat:{flat}");
+        }
+        static int CountDigit(int number)
+        {
+            int count = 1;
+            while (number > 9)
+            {
+                count++;
+                number = number / 10;
+            }
+            return count;
+        }
+        static int SummDigit(int number)
+        {
+            int summ = 0;
+            while (number > 0)
+            {
+                int digit = number % 10;
+                summ += digit;
+                number /= 10;
+            }
+            return summ;
+        }
+
+        static int GetMinValue(int[] array)
+        {
+            int min = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i == 0)
+                {
+                    min = array[i];
+                }
+                if (array[i] < min)
+                {
+                    min = array[i];
+                }
+            }
+            return min;
+        }
+        static int GetMaxValue(int[] array)
+        {
+            int max = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i == 0)
+                {
+                    max = array[i];
+                }
+                if (array[i] > max)
+                {
+                    max = array[i];
+                }
+            }
+            return max;
+        }
+        static int GetSummElement(int[] array)
+        {
+            int summ = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                summ += array[i];
+            }
+            return summ;
+        }
+        static double GetAverage(int[] array)
+        {
+            double average = 0;
+            double summ = GetSummElement(array);
+            average = summ / array.Length;
+            return average;
+        }
+        static int GetCountEven(int[] array)
+        {
+            int even = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] % 2 == 0)
+                {
+                    even++;
+                }
+            }
+            return even;
+        }
+        static int GetCountOdd(int[] array)
+        {
+            int odd = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] % 2 != 0)
+                {
+                    odd++;
+                }
+            }
+            return odd;
+        }
+
+        static int GetIndex(int[] array, int value)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == value)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        //16.06
         static void GetCastomeRead(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
@@ -84,6 +218,7 @@ namespace Arrays
             }
             Console.WriteLine();
         }
+
         static int GetEvenCount(int[] array)
         {
             int evenCount = 0;
@@ -156,6 +291,7 @@ namespace Arrays
             }
             return (negativeSumm);
         }
+
         static int[] GetIndexesWithNegativeValue(int[] array)
         {
             int size = NegativeCount(array);
@@ -236,6 +372,7 @@ namespace Arrays
             }
             return arrayLessTheLAstOne;
         }
+
         static int[] GetSummArray(int[] array1, int[] array2)
         {
             int[] summArray = new int[array1.Length];
@@ -264,6 +401,7 @@ namespace Arrays
             }
             return summ;
         }
+
         static bool IsSummArrayMore(int[] array1, int[] array2)
         {
             int summ1 = GetArraySumm(array1);
@@ -274,97 +412,21 @@ namespace Arrays
             }
             return false;
         }
-        
-        static int[,] GetRandomMatrix(int n, int m, int minValue, int maxValue)
+
+        static void GetBubble(int[] array)
         {
-            Random rnd = new Random();
-            int[,] matrix = new int[n, m];
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = i; j < array.Length; j++)
                 {
-                    matrix[i, j] = rnd.Next(minValue, maxValue);
-                }
-            }
-            return matrix;
-        }
-        static void WriteMatrix(int[,] matrix, int n, int m)
-        {
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    Console.Write($"{matrix[i, j]} ");
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine();
-        }
-        static int GetSummMatrixRow(int[,] matrix,int n, int row)
-        {
-            int summ = 0;
-            for (int i = 0; i <= n; i++)
-            {
-                summ += matrix[row, i];
-            }
-            return summ;
-        }
-        static int GetSummMatrixColumn(int[,] matrix,int m, int column)
-        {
-            int summ = 0;
-            for (int i = 0; i <= m; i++)
-            {
-                summ += matrix[i, column];
-            }
-            return summ;
-        }
-        static int GetSummMatrix(int[,] matrix, int n, int m)
-        {
-            int summ = 0;
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    summ += matrix[i, j];
-                }
-            }
-            return summ;
-        }
-        static bool IsDigit(int[,]matrix, int n, int m,  int digit)
-        {
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    if (matrix[i, j] == digit)
+                    if (array[i] > array[j])
                     {
-                        return true;
+                        int numb = array[i];
+                        array[i] = array[j];
+                        array[j] = numb;
                     }
                 }
             }
-            return false;
-        }
-        static bool IsRowDigit(int[,] matrix, int n, int m, int row)
-        {
-            for (int i = 0; i < n; i++)
-            {
-                if (matrix[row, i] == row)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        static bool IsColumnDigit(int[,] matrix, int n, int m, int column)
-        {
-            for (int i = 0; i < m; i++)
-            {
-                if (matrix[i, column] == column)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }
