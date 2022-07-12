@@ -7,30 +7,98 @@ namespace Arrays
         //доп задания
         static void Main(string[] args)
         {
-            /*int[] array = GetRandom(5, -1, 8);
+            int[] array = GetRandom(5, -1, 8);
             Write(array);
             GetBubble(array);
             Write(array);
-            Console.WriteLine("Введите минимальное и максимальные число для матрицы: ");
-            int minValue = int.Parse(Console.ReadLine());
-            int maxValue = int.Parse(Console.ReadLine());
-            Console.WriteLine("Введите количество строк и столцов в матрице: ");
-            int n = int.Parse(Console.ReadLine());
-            int m = int.Parse(Console.ReadLine());
-            int[,] matrix = GetRandomMatrix(n, m, minValue, maxValue);
-            WriteMatrix(matrix, n, m);
-            Console.WriteLine("введите норме строки для ее суммы: ");
-            int row = int.Parse(Console.ReadLine());
-            int summRow = GetSummMatrixRow(matrix, n, row);
-            Console.WriteLine(summRow);
-            Console.WriteLine("Введите номер столбца: ");
-            int column = int.Parse(Console.ReadLine());
-            int summColumn = GetSummMatrixColumn(matrix, m, column);
-            Console.WriteLine(summColumn);
-            int summMatrix = GetSummMatrix(matrix, n, m);
-            Console.WriteLine(summMatrix);
-            Console.WriteLine("введите число, мы проверим, есть ли оно в матрице: ");
-            int number = int.Parse(Console.ReadLine());*/
+            /*Console.WriteLine("введите новую размерность: ");
+            int size = int.Parse(Console.ReadLine());
+            int[] reSize = Resize(array, size);
+            Write(reSize);
+            int value = int.Parse(Console.ReadLine());
+            int[] addValue = AddValue(array, value);
+            Write(addValue);
+            int[] removeFirst = RemoveFirst(array);
+            Write(removeFirst);
+            int[] removeLast = RemoveLast(array);
+            Write(removeLast);*/
+            int[] removeAt = RemoveAt(array, 1);
+            Write(removeAt);
+            int[] array2 = { 0, 1, 2, 1 };
+            array2 = RemoveValue(array2, 1);
+            Write(array2);
+        }
+
+        //12.07
+        static int[] Resize(int[] array, int size)
+        {
+            int[] newArray = new int[size];
+            for (int i = 0; i < array.Length && i < size; i++)
+            {
+                newArray[i] = array[i];
+
+            }
+            return newArray;
+        }
+        static int[] AddValue(int[] array, int value)
+        {
+            int[] newArray = Resize(array, array.Length + 1);
+            newArray[newArray.Length - 1] = value;
+            return newArray;
+        }
+        static int[] RemoveFirst(int[] array)
+        {
+            int[] newArray = new int [array.Length - 1];
+            for (int i = 0; i < newArray.Length; i++)
+            {
+                newArray[i] = array[i+1];
+            }
+            return newArray;
+        }
+        static int[] RemoveLast(int[] array)
+        {
+            int[] newArray = Resize(array, array.Length - 1);
+            return newArray;
+        }
+        static int[] RemoveAt(int[] array, int index)
+        {
+            int[] newArray = new int[array.Length - 1];
+            for (int i = 0, j = 0; j < newArray.Length; i++, j++)
+            {
+                if (i == index)
+                {
+                    i++;
+                }
+                newArray[j] = array[i];
+
+            }
+            return newArray;
+        }
+        static int GetCountValue(int[] array, int value)
+        {
+            int count = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == value)
+                {
+                    count += 1;
+                }
+            }
+            return count;
+        }
+        static int[] RemoveValue(int[] array, int value)
+        {
+            int count = GetCountValue(array, value);
+            int[] newArray = new int[array.Length - count];
+            for (int i = 0, j = 0; i < newArray.Length && j < array.Length; i++, j++)
+            {
+                while (array[j] == value)
+                {
+                    j++;
+                }
+                newArray[i] = array[j];
+            }
+            return newArray;
         }
 
         //25.04
