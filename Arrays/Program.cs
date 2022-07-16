@@ -7,11 +7,11 @@ namespace Arrays
         //доп задания
         static void Main(string[] args)
         {
-            int[] array = GetRandom(5, -1, 8);
+            /*int[] array = GetRandom(5, -1, 8);
             Write(array);
             GetBubble(array);
             Write(array);
-            /*Console.WriteLine("введите новую размерность: ");
+            Console.WriteLine("введите новую размерность: ");
             int size = int.Parse(Console.ReadLine());
             int[] reSize = Resize(array, size);
             Write(reSize);
@@ -21,12 +21,23 @@ namespace Arrays
             int[] removeFirst = RemoveFirst(array);
             Write(removeFirst);
             int[] removeLast = RemoveLast(array);
-            Write(removeLast);*/
+            Write(removeLast);
             int[] removeAt = RemoveAt(array, 1);
             Write(removeAt);
             int[] array2 = { 0, 1, 2, 1 };
             array2 = RemoveValue(array2, 1);
-            Write(array2);
+            Write(array2);*/
+            int[] array3 = { 4, 5, 12, 17, 1, 88, -1, 4, 0 };
+            Write(array3);
+            array3 = RemoveAtSkip(array3, 2, 4);
+            Write(array3);
+            int[] array4 = { 1, 2, 3, 4, 7 };
+            int[] array5 = { 4, 2, 3, 8, 7 };
+            Write(array4);
+            int compare = Compare(array4, array5);
+            Console.WriteLine(compare);
+            int[] array6 = UnionArrays(array3, array4);
+            Write(array6);
         }
 
         //12.07
@@ -97,6 +108,48 @@ namespace Arrays
                     j++;
                 }
                 newArray[i] = array[j];
+            }
+            return newArray;
+        }
+        static int[] RemoveAtSkip(int[] array, int startInd, int finishInd)
+        {
+            int count = finishInd - startInd;
+            int[] newArray = new int[array.Length - count - 1];
+            for (int i = 0, j = 0; i < array.Length && j < newArray.Length; j++, i++)
+            {
+                while ((i >= startInd) && (i <= finishInd))
+                {
+                    i++;
+                }
+                newArray[j] = array[i];
+            }
+            return newArray;
+        }
+        static int Compare(int[] array1, int[] array2)
+        {
+            int result = 0;
+            for (int i = 0; i < array1.Length; i++)
+            {
+                for (int j = 0; j < array2.Length; j++)
+                {
+                    if ((array1[i] == array2[j]) && (i == j))
+                    {
+                        result++;
+                    }
+                }
+            }
+            return result;
+        }
+        static int[] UnionArrays(int[] array1, int[] array2)
+        {
+            int[] newArray = new int[array1.Length+array2.Length];
+            for (int i = 0, j = 0; i < array1.Length; i++, j++)
+            {
+                newArray[i] = array1[j];
+            }
+            for (int i = array1.Length, j = 0; i < newArray.Length; i++, j++)
+            {
+                newArray[i] = array2[j];
             }
             return newArray;
         }
