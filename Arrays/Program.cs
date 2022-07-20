@@ -128,15 +128,12 @@ namespace Arrays
         static int Compare(int[] array1, int[] array2)
         {
             int result = 0;
-            for (int i = 0; i < array1.Length; i++)
+            for (int i = 0; i < array1.Length && i < array2.Length; i++)
             {
-                for (int j = 0; j < array2.Length; j++)
-                {
-                    if ((array1[i] == array2[j]) && (i == j))
+                    if (array1[i] == array2[i])
                     {
                         result++;
                     }
-                }
             }
             return result;
         }
