@@ -6,7 +6,7 @@ namespace Arrays
     {
         static void Main(string[] args)
         {
-            
+
         }
         static int[] Resize(int[] array, int size)
         {
@@ -511,6 +511,20 @@ namespace Arrays
                 newArray[j] = array[i];
             }
             return newArray;
+        }
+        static string StringDivide(string sentence, char key)
+        {
+            string newSentence = "";
+            for (int i = 0; i < sentence.Length; i++)
+            {
+                if (sentence[i] == key)
+                {
+                    i++;
+                }
+                char letter = sentence[i];
+                newSentence += letter;
+            }
+            return newSentence;
         }
     }
 }
