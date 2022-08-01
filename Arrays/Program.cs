@@ -8,15 +8,12 @@ namespace Arrays
         {
             
         }
-
-        
         static int[] Resize(int[] array, int size)
         {
             int[] newArray = new int[size];
             for (int i = 0; i < array.Length && i < size; i++)
             {
                 newArray[i] = array[i];
-
             }
             return newArray;
         }
@@ -119,8 +116,6 @@ namespace Arrays
             }
             return newArray;
         }
-
-        
         static int[] GetRandom(int size, int min, int max)
         {
             Random rnd = new Random();
@@ -139,7 +134,6 @@ namespace Arrays
             }
             Console.WriteLine();
         }
-
         static int GetSumm(int[] array)
         {
             int summ = 0;
@@ -149,7 +143,6 @@ namespace Arrays
             }
             return summ;
         }
-
         static bool IsContains(int[] array, int number)
         {
             for (int i = 0; i < array.Length; i++)
@@ -161,7 +154,6 @@ namespace Arrays
             }
             return false;
         }
-
         static bool IsPalindrom(string word)
         {
             for (int i = 0, j = word.Length-1; i < j; i++, j--)
@@ -210,7 +202,6 @@ namespace Arrays
             }
             return summ;
         }
-
         static int GetMinValue(int[] array)
         {
             int min = 0;
@@ -283,7 +274,6 @@ namespace Arrays
             }
             return odd;
         }
-
         static int GetIndex(int[] array, int value)
         {
             for (int i = 0; i < array.Length; i++)
@@ -294,9 +284,7 @@ namespace Arrays
                 }
             }
             return -1;
-        }
-
-        
+        }      
         static void GetCastomeRead(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
@@ -305,7 +293,6 @@ namespace Arrays
             }
             Console.WriteLine();
         }
-
         static int GetEvenCount(int[] array)
         {
             int evenCount = 0;
@@ -378,7 +365,6 @@ namespace Arrays
             }
             return (negativeSumm);
         }
-
         static int[] GetIndexesWithNegativeValue(int[] array)
         {
             int size = NegativeCount(array);
@@ -459,7 +445,6 @@ namespace Arrays
             }
             return arrayLessTheLAstOne;
         }
-
         static int[] GetSummArray(int[] array1, int[] array2)
         {
             int[] summArray = new int[array1.Length];
@@ -488,7 +473,6 @@ namespace Arrays
             }
             return summ;
         }
-
         static bool IsSummArrayMore(int[] array1, int[] array2)
         {
             int summ1 = GetArraySumm(array1);
@@ -499,7 +483,6 @@ namespace Arrays
             }
             return false;
         }
-
         static void GetBubble(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
@@ -514,6 +497,16 @@ namespace Arrays
                     }
                 }
             }
+        }
+        static int[] Subarray(int[] array, int start, int finish)
+        {
+            int size = finish - start + 1;
+            int[] newArray = new int[size];
+            for (int i = start, j = 0; i < array.Length && j < newArray.Length; i++, j++)
+            {
+                newArray[j] = array[i];
+            }
+            return newArray;
         }
     }
 }
