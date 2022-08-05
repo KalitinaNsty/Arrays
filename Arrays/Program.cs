@@ -505,10 +505,6 @@ namespace Arrays
             int[] newArray = new int[size];
             for (int i = start, j = 0; i < array.Length && j < newArray.Length; i++, j++)
             {
-                if ((i > start) && (i > finish))
-                {
-                    i++;
-                }
                 newArray[j] = array[i];
             }
             return newArray;
