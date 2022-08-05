@@ -539,12 +539,6 @@ namespace Arrays
                     j++;
                 }
                 newSentence[j] = currentWord;
-                if (key == 0)
-                {
-                    string[] sensenceException = new string[sentence.Length];
-                    sensenceException = newSentence;
-                    return sensenceException;
-                }
             }
             return newSentence;
         }
