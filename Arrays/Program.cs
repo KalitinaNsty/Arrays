@@ -6,7 +6,8 @@ namespace Arrays
     {
         static void Main(string[] args)
         {
-            
+            string[] newWord = StringDivide("My new test", 'a');
+            WordWrite(newWord);
         }
         static int[] Resize(int[] array, int size)
         {
@@ -25,10 +26,10 @@ namespace Arrays
         }
         static int[] RemoveFirst(int[] array)
         {
-            int[] newArray = new int [array.Length - 1];
+            int[] newArray = new int[array.Length - 1];
             for (int i = 0; i < newArray.Length; i++)
             {
-                newArray[i] = array[i+1];
+                newArray[i] = array[i + 1];
             }
             return newArray;
         }
@@ -96,16 +97,16 @@ namespace Arrays
             int result = 0;
             for (int i = 0; i < array1.Length && i < array2.Length; i++)
             {
-                    if (array1[i] == array2[i])
-                    {
-                        result++;
-                    }
+                if (array1[i] == array2[i])
+                {
+                    result++;
+                }
             }
             return result;
         }
         static int[] UnionArrays(int[] array1, int[] array2)
         {
-            int[] newArray = new int[array1.Length+array2.Length];
+            int[] newArray = new int[array1.Length + array2.Length];
             for (int i = 0, j = 0; i < array1.Length; i++, j++)
             {
                 newArray[i] = array1[j];
@@ -156,7 +157,7 @@ namespace Arrays
         }
         static bool IsPalindrom(string word)
         {
-            for (int i = 0, j = word.Length-1; i < j; i++, j--)
+            for (int i = 0, j = word.Length - 1; i < j; i++, j--)
             {
                 if (word[i] == word[j])
                 {
@@ -284,7 +285,7 @@ namespace Arrays
                 }
             }
             return -1;
-        }      
+        }
         static void GetCastomeRead(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
@@ -507,6 +508,43 @@ namespace Arrays
                 newArray[j] = array[i];
             }
             return newArray;
+        }
+        static int CountKey(string sentence, char key)
+        {
+            int countKey = 0;
+            for (int i = 0; i < sentence.Length; i++)
+            {
+                if (sentence[i] == key)
+                {
+                    countKey++;
+                }
+            }
+            return countKey;
+        }
+        static string[] StringDivide(string sentence, char key)
+        {
+            int countKey = CountKey(sentence, key);
+            string[] newSentence = new string[countKey + 1];
+            string currentWord = "";
+            for (int i = 0, j = 0; i < sentence.Length && j < newSentence.Length; i++)
+            {
+                currentWord += sentence[i];
+                if (sentence[i] == key)
+                {
+                    currentWord = "";
+                    j++;
+                }
+                newSentence[j] = currentWord;
+            }
+            return newSentence;
+        }
+        static void WordWrite(string[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine($"{array[i]}");
+            }
+            Console.WriteLine();
         }
     }
 }
