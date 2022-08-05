@@ -7,7 +7,7 @@ namespace Arrays
         static void Main(string[] args)
         {
             string[] newWord = StringDivide("My new test", 'a');
-            WordWrite(newWord);
+            Write(newWord);
         }
         static int[] Resize(int[] array, int size)
         {
@@ -538,7 +538,7 @@ namespace Arrays
             }
             return newSentence;
         }
-        static void WordWrite(string[] array)
+        static void Write(string[] array)
         {
             for (int i = 0; i < array.Length; i++)
             {
